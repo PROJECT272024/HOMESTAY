@@ -6,7 +6,7 @@ import InputTextStyle from '@/components/formfields/InputTypeStyle';
 import RadioGroupTypeStyle from '@/components/formfields/RadioGroupTypeStyle';
 import DropDownTypeStyle from '@/components/formfields/DropDownTypeStyle';
 import InputNumberTextStyle from '@/components/formfields/InputNumberTypeStyle';
-import {Divider,Spinner} from "@nextui-org/react";
+import {Spinner} from "@nextui-org/spinner";
 import {toast} from 'react-toastify'
 import { useRouter } from 'next/navigation';
 
@@ -246,7 +246,7 @@ const UserAdd = () => {
         
         <form  method="POST" className='grid grid-cols-1 lg:grid-cols-2 gap-2  items-center '
           onSubmit={handleSubmitData}>
-            <Divider className="my-4 col-span-2" />
+            <div className="my-1 lg:col-span-2 h-px border-solid border-gray-200 shadow-md" />
             <InputTextStyle id='name' name='name' required='true' 
               readonly='false' value={feilds.name} 
               placeholder='Enter Name' handler={handleChange}/>
