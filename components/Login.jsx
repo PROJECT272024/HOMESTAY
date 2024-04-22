@@ -25,7 +25,7 @@ const Login = () => {
             if(res.error){
                 setError(true);
             }else{
-                router.replace("homestay")
+                router.replace("/homestay")
                 router.refresh()
             }
             
