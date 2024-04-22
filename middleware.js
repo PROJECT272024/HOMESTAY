@@ -12,4 +12,5 @@ import { parse } from 'cookie';
     return NextResponse.next()
   }*/
 
-export const config = {matcher:["/"]};
+export const config = {matcher:["/homestay/:path*","/user/:path*"]};
+
