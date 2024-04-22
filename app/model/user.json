@@ -1,0 +1,19 @@
+{
+    "name":"",
+    "employeeId":"",
+    "dob":"",
+    "emailId":"",
+    "organization":"",
+    "phone":"",
+    "altPhone":"",
+    "location":{
+        "address":"",
+        "villageOrTown":"",
+        "district":"",
+        "state":"",
+        "pinCode":""
+    },
+    "role":"",
+    "isActive":true,
+    "createdOn":""
+}
