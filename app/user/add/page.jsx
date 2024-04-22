@@ -210,6 +210,7 @@ const UserAdd = () => {
         try {
           const res = await fetch('/api/users',{
             method:"POST",
+            mode: 'no-cors',
             header:{
               "Content-Type":"application/json"
             },

@@ -68,7 +68,7 @@ const Login = () => {
                     Provide valid login credentials.
                 </div>
             }
-            <Link href="/user/add" className='mt-2 flex justify-self-end'> 
+            <Link href="/register" className='mt-2 flex justify-self-end'> 
                 Not Register? Click here to <span className='text-blue-600 mr-2'> register</span>.
             </Link>
             

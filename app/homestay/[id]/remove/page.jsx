@@ -9,6 +9,7 @@ const delData = async (params,homestayImages,signature)=>{
         console.log("Url to be used - ", params.id)
         const res = await fetch(url,{
             method:"DELETE",
+            mode: 'no-cors',
             body:JSON.stringify({"id":params.id,
                 "homestayImages":homestayImages,
                 'signature':signature})
