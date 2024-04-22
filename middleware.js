@@ -11,4 +11,4 @@ export function middleware(request) {
     return NextResponse.next()
   }
 
-export const config = {matcher:["/homestay/:path*",'/api/:path*','/user/:path*']};
+export const config = {matcher:["/homestay/:path*",'/user/:path*']};
