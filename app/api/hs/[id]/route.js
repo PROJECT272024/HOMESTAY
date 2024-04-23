@@ -2,6 +2,8 @@ import homeStay from "@/app/model/Homestay";
 import connectDB from "@/config/database";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import cloudinary from "@/config/cloudinaryRelated";
+import { createPublicId } from "@/utils/extras";
 
 export const GET = async (req,{ params })=>{
     try {
@@ -54,8 +56,6 @@ export const PUT = async (res,{params})=>{
 }
 export const DELETE = async (res,{params})=>{
     try {
-        let data = await res.json();
-        console.log('data from out route - ',data)
         await connectDB()
         /*const sessionUser = await getServerSession();
         console.log(sessionUser)
@@ -66,9 +66,27 @@ export const DELETE = async (res,{params})=>{
             }); 
         }*/
         const {id} = params;
-        console.log('ID - ',id, ' - ', data)
+        console.log('ID - ',id)
         const exsistingHs = await homeStay.findByIdAndDelete(id)
-        return new Response(JSON.stringify({'message':'Homestay Deleted'}),{
+        let makeId = []
+        exsistingHs.homestayImages.map((val,index)=>(
+            makeId.push(createPublicId(val))
+        ));
+        if(makeId.length>0){
+            await cloudinary.api.delete_resources(makeId, { invalidate: true }, function(error, result) {
+                if (error) {
+                    console.error(error);
+                }else{
+                    console.log("Result - ",result)
+                }
+            });
+        }
+        if(exsistingHs.signature!=""){
+            await cloudinary.uploader.destroy(createPublicId(exsistingHs.signature))
+        }
+        return new Response(JSON.stringify({
+            'message':'Deletion success'}),
+            {
             status:201
         });
     } catch (error) {

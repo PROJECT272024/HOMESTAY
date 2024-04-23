@@ -1,8 +1,5 @@
 import { NextResponse } from 'next';
-import { promisify } from 'util';
-import { unlink } from 'fs';
-
-const asyncUnlink = promisify(unlink);
+import cloudinary from '@/config/cloudinaryRelated';
 
 export const POST = async (req) => {
   if (!req || !req.json) {
@@ -13,16 +10,13 @@ export const POST = async (req) => {
   }
 
   try {
+    
     let data = await req.json();
+    
     console.log('I was suppose to be deleted - ', data.fileName);
-    const path = `public/homestay/${data.fileName}`;
-
-    await asyncUnlink(path);
-
-    console.log('No problem - ', path);
-
+    await cloudinary.uploader.destroy(data.fileName)
     return new Response(JSON.stringify({'message':'File deleted sucessfully'}),{
-        status:201
+      status:201
     });
   } catch (error) {
     console.log(error);

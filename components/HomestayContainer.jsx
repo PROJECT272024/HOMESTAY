@@ -30,18 +30,9 @@ const HomestayContainer = ({data:homestays,setDelete,pageNo,setPageNo,totalItems
        setStatus(true)
         try {
             let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
-            console.log("Url to be used - ", id)
             const homestay=homestays.filter((value)=>(value._id==id))
-            console.log('Homestay - ',homestay)
-            const makeData = {
-                "id":id,
-                "homestayImages":homestay.homestayImages,
-                'signature':homestay.signature
-            }
-    
-            const res = await fetch(url,{
-                method:"DELETE",
-                body:JSON.stringify(makeData)
+            let res = await fetch(url,{
+                method:"DELETE"
             })
             if(res.status==201) {
                 //const hs = homestays.filter((value)=>value._id!=id)

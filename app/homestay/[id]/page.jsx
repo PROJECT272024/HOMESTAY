@@ -59,8 +59,8 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                       hover:drop-shadow-md hover:bg-blue-800'>
                       <FaRegEdit className='font-bold sm:mr-2'/> <span className='hidden sm:flex'>Edit</span>
                   </Link>
-                  <Link href={`/homestay/${params.id}/remove`}  signature={final.signature}  images={final.homestayImages} 
-                      className='p-2 sm:w-20 flex flex-row items-center justify-center bg-red-600 mr-2 rounded-lg 
+                  <Link href={`/homestay/${params.id}/remove`} className='p-2 sm:w-20 flex flex-row items-center 
+                    justify-center bg-red-600 mr-2 rounded-lg 
                       hover:drop-shadow-md hover:bg-red-800'>
                       <FaTrashAlt  className='font-bold sm:mr-2'/> <span className='hidden sm:flex'>Delete</span>
                   </Link>
@@ -424,7 +424,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                                   "grid-cols-1")} justify-center gap-2`} >
                        {final.homestayImages.map((val,index)=>(
                           <div className='p-2 rounded-md'>
-                            <Image src={`/homestay/${val}`}
+                            <Image src={val}
                             width={0} key={index}
                             height={0}
                             sizes='200'
@@ -444,7 +444,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
               </div>
               <div className='flex justify-center mb-2'>
                 {final.signature.length==0?"No Signature Uploaded":
-                  <Image src={`/signature/${final.signature}`}
+                  <Image src={final.signature}
                   width={0}
                   height={0}
                   sizes='200'

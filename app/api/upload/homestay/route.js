@@ -1,7 +1,6 @@
 
-import { writeFile } from "fs/promises";
+import cloudinary from "@/config/cloudinaryRelated";
 import {NextResponse} from "next/server";
-//import cloudinary from '@/config/cloudinaryRelated'
 
 export const POST = async (req)=>{
     const data = await req.formData();
@@ -20,7 +19,7 @@ export const POST = async (req)=>{
             )
         }
 
-        files.map((file,index)=>{
+        /*files.map((file,index)=>{
             const upload = async ()=>{
                 let byteData = await file[1].arrayBuffer();
                 let buffer = Buffer.from(byteData);
@@ -28,31 +27,39 @@ export const POST = async (req)=>{
                 await writeFile(path,buffer);
             }
             upload()
-        }) 
-        /*let imageUrl = []
-        files.map((file,index)=>{
-            const upload = async ()=>{
-                let byteData = await file[1].arrayBuffer();
-                let imageArray = Array.from(new Uint8Array(byteData))
-                let buffer = Buffer.from(imageArray);
+        }) */
+        const imageUploadPromises = [];
 
-                const imageBase64 = buffer.toString("base64");
-                
-                const result = await cloudinary.uploader.upload(
-                    `data:image/png;base64;${imageBase64}`,{
-                        folder: 'homestayrelated'
-                    }
-                );
-                imageUrl.push(result.secure_url)
-                const uploadedImages = await Promise.all(imageUrl);
-                console.log(uploadedImages)
-            }
-            upload()
-        })*/
-        return new Response(JSON.stringify({'message':'File Uploaded sucessfully'}),{
-            status:201
-        });    
+        for (const image of files) {
+            // Assuming image is a File object, extract the file data
+            const imageBuffer = await image[1].arrayBuffer();
+            const imageArray = Array.from(new Uint8Array(imageBuffer));
+            const imageData = Buffer.from(imageArray);
+
+            // Convert the image data to base64
+            const imageBase64 = imageData.toString('base64');
+
+            // Upload the image data as a base64 string to Cloudinary
+            const result = await cloudinary.uploader.upload(
+                `data:image/png;base64,${imageBase64}`,
+                {
+                folder: 'homestayrelated/homestay',
+                }
+            );
+
+            imageUploadPromises.push(result.secure_url);
+        }
+        
+
+        // Wait for all image uploads to complete
+        const uploadedImages = await Promise.all(imageUploadPromises);
+        console.log("Uploaded image infomartion ",imageUploadPromises )
+        return new Response(JSON.stringify({'message':'File Uploaded sucessfully',
+                    "fileName":imageUploadPromises}),{
+                    status:201
+                });
     } catch (error) {
+        console.log(error)
         return new Response(JSON.stringify({'message':'File Uploading Problem'}),{
             status:500
         });    

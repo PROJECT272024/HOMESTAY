@@ -1,5 +1,5 @@
 
-import { writeFile,unlink } from "fs/promises";
+import cloudinary from "@/config/cloudinaryRelated";
 import {NextResponse} from "next/server"
 export const POST = async (req)=>{
     const data = await req.formData();
@@ -16,7 +16,7 @@ export const POST = async (req)=>{
                 }
             )
         }
-
+        /*
         files.map((file,index)=>{
             const upload = async ()=>{
                 let byteData = await file[1].arrayBuffer();
@@ -25,8 +25,37 @@ export const POST = async (req)=>{
                 await writeFile(path,buffer);
             }
             upload()
-        }) 
-        return new Response(JSON.stringify({'message':'File Uploaded sucessfully'}),{
+        })*/ 
+        const imageUploadPromises = [];
+
+        for (const image of files) {
+            // Assuming image is a File object, extract the file data
+            const imageBuffer = await image[1].arrayBuffer();
+            const imageArray = Array.from(new Uint8Array(imageBuffer));
+            const imageData = Buffer.from(imageArray);
+
+            // Convert the image data to base64
+            const imageBase64 = imageData.toString('base64');
+
+            // Upload the image data as a base64 string to Cloudinary
+            const result = await cloudinary.uploader.upload(
+                `data:image/png;base64,${imageBase64}`,
+                {
+                folder: 'homestayrelated/signature',
+                }
+            );
+
+            imageUploadPromises.push(result.secure_url);
+        }
+        
+
+        // Wait for all image uploads to complete
+        const uploadedImages = await Promise.all(imageUploadPromises);
+        
+        return new Response(JSON.stringify({
+            'message':'File Uploaded sucessfully',
+            'fileName':uploadedImages[0]
+        }),{
             status:201
         });    
     } catch (error) {

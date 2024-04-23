@@ -1,34 +1,34 @@
-import homeStay from '@/app/model/HomeStayStructure'
+
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-const delData = async (params,homestayImages,signature)=>{
+
+const delData = async (params)=>{
     console.log("I am from delete page")
+    let status=0
     try {
         let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${params.id}`
         console.log("Url to be used - ", params.id)
         const res = await fetch(url,{
-            method:"DELETE",
-            body:JSON.stringify({"id":params.id,
-                "homestayImages":homestayImages,
-                'signature':signature})
+            method:"DELETE"
         })
         if(res.status==201) {
-            console.log("Success - ", params.id)
-            return 1
+            status=1
+            
         }else {
             console.log("Problem - ", params.id)
-            return 0
+            status =  0
 
         }
     } catch (error) {
         console.log(error)
-        return 0
+        status= 0
     }
+    return status
 }
-const HomeStayRemove = async({params,images:homestayImages,signature}) => {
+const HomeStayRemove = async({params}) => {
     
-    const test = await delData(params,homestayImages,signature)
+    const test = await delData(params)
     if(test==1){
         redirect("/homestay",'replace')
     }else{

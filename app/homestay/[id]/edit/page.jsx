@@ -17,6 +17,7 @@ import DateInputTextStyle from '@/components/formfields/DateInputTypeStyle';
 import Image from 'next/image';
 import { FaTrashAlt } from 'react-icons/fa';
 import WhiteModal from '@/components/WhiteModal';
+import { createPublicId } from '@/utils/extras';
 
 
 
@@ -180,13 +181,14 @@ const HomestayEditForm =  ({params}) => {
             
             if(res.status==201){
                 url =  `${process.env.NEXT_PUBLIC_API_DOMAIN}api/upload/signature/del/`   
+                let delFileId = createPublicId(fileName)
                 res =  await fetch(url,{
                     method:'POST',
                     header:{
                     "Content-Type":"application/json"
                     },
                     body:JSON.stringify(
-                        {"fileName":fileName}
+                        {"fileName":delFileId}
                     )
                 });
                 if(res.status==201){
@@ -258,13 +260,14 @@ const HomestayEditForm =  ({params}) => {
             
             if(res.status==201){
                 url =  `${process.env.NEXT_PUBLIC_API_DOMAIN}api/upload/homestay/del/`   
+                let delFileId = createPublicId(fileName)
                 res =  await fetch(url,{
                     method:'POST',
                     header:{
                     "Content-Type":"application/json"
                     },
                     body:JSON.stringify(
-                        {"fileName":fileName}
+                        {"fileName":delFileId}
                     )
                 });
                 if(res.status==201){
@@ -316,21 +319,18 @@ const HomestayEditForm =  ({params}) => {
             }
             const imageData = new FormData();
             const oldList=feilds.homestayImages
-            let nameList=feilds.homestayImages
-            const imgLength = nameList.length
+            const imgLength = oldList.length
             let checkImageCount=0
             for(let i=0;i<files.length;i++){
                 if(i+imgLength>4) {
                     checkImageCount=1
                     break
                 }
-                let fileName = Date.now()+" " +files[i].name
-                imageData.append(fileName,files[i]);
-                nameList.push(fileName)
+                imageData.append(files[i].name,files[i]);
                 
             }
             if(checkImageCount==1){
-                toast.warning('Only four images are allowed for homestay to upload');
+                toast.warning('Only five images are allowed for homestay to upload');
                 return;
             }
             let url = process.env.NEXT_PUBLIC_API_DOMAIN + 'api/upload/homestay'
@@ -340,25 +340,29 @@ const HomestayEditForm =  ({params}) => {
                 body:imageData
             })
             if(res.status==201) {
-                
+                const responseData = await res.json()
+                const returnedFile = responseData.fileName
+                returnedFile.map((val,index)=>(
+                    oldList.push(val)
+                ));
                 //const userData = sethomeStay(feilds)
                 url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
-                const res = await fetch(url,{
+                const res2 = await fetch(url,{
                     method:'PUT',
                     header:{
                     "Content-Type":"application/json"
                     },
                     body:JSON.stringify({
-                        "homestayImages":nameList,
+                        "homestayImages":oldList,
                         "modifiedBy":session.user.email
                     })
                 });
                 
-                if(res.status==201){
+                if(res2.status==201){
                     setError(false)
                     setErrorMessageList(()=>[])
                     toast.success('Data Updated Successfully')
-                    setImageList(["homestayImages",nameList])
+                    setImageList(["homestayImages",oldList])
                     setImageChange(!isImageChange)
                     console.log('1. Returning after success')
                 }else{
@@ -383,7 +387,7 @@ const HomestayEditForm =  ({params}) => {
         } catch (error) {
             setFeilds((prevFeilds)=>({
                 ...prevFeilds,
-                'homestayImages':nameList
+                'homestayImages':oldList
             }))
             toast.error('Error in File Upload')
             console.log('2. Error in uploading',error)
@@ -405,9 +409,7 @@ const HomestayEditForm =  ({params}) => {
             }
             const imageData = new FormData();
             
-            let fileName = Date.now()+" " +files[0].name
-            console.log('3. Signature File is about to be added ',fileName)
-            imageData.append(fileName,files[0]);
+            imageData.append(files[0].name,files[0]);
                 
             let url = process.env.NEXT_PUBLIC_API_DOMAIN+'api/upload/signature'
                      
@@ -417,10 +419,12 @@ const HomestayEditForm =  ({params}) => {
             })
             console.log('4 Ok till here  ',url)
             if(res.status==201) {
+                const responseData = await res.json()
+                const fileName = responseData.fileName
                 console.log('5. I am here SGFTER DATA IS SAVED SUCESSFULLY IN DATABASE')
                 //const userData = sethomeStay(feilds)
                 url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
-                const res = await fetch(url,{
+                const res2 = await fetch(url,{
                     method:'PUT',
                     header:{
                     "Content-Type":"application/json"
@@ -431,7 +435,7 @@ const HomestayEditForm =  ({params}) => {
                     })
                 });
                 
-                if(res.status==201){
+                if(res2.status==201){
                     console.log('6. File is loaded SUCESSFULLY')
                     setError(false)
                     setErrorMessageList(()=>[])
@@ -1613,7 +1617,7 @@ const HomestayEditForm =  ({params}) => {
             <HomeStayFromSelector number={6} isActive={(activeBlock==6)? 'true':'false'} handler={()=>setActiveBlock(6)}
                 content={'Block F : RECORD KEEPING , OCCUPANCY DETAILS AND OTHER INFORMATION'}/>
             <HomeStayFromSelector number={7} isActive={(activeBlock==7)? 'true':'false'} handler={()=>setActiveBlock(7)}
-                content={'Block G : File Uploading'}/>
+                content={'Block G : FILE UPLOADING'}/>
         </div>
         
         {startLoading && <div className='lg:col-span-7 flex justify-center items-center'><Spinner label="Loading Data..." color="primary" size='lg'/></div>}

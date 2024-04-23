@@ -44,47 +44,41 @@ const HomestayForm =  () => {
 
             if(!files){
                 toast.warning("No file selected")
+                setModelStatus(false)
                 return
             }
             const imageData = new FormData();
-            const oldList = feilds.homestayImages
-            let nameList=feilds.homestayImages
-            const imgLength = feilds.homestayImages.length
+            let checkImageCount=0
             for(let i=0;i<files.length;i++){
-                if(i+imgLength>4){
+                if(i>4) {
+                    checkImageCount=1
                     break
                 }
-                let fileName = Date.now()+" " +files[i].name
-                imageData.append(fileName,files[i]);
-                nameList.push(fileName)
+                imageData.append(files[i].name,files[i]);
             }
-            if(nameList.length==imgLength){
-                toast.warning('Only four images are allowed for homestay to upload');
+            if(checkImageCount==1){
+                toast.error('Only five images are allowed for homestay to upload');
+                setModelStatus(false)
                 return;
             }
-            setFeilds((prevFeilds)=>({
-                    ...prevFeilds,
-                    'homestayImages':nameList
-            })) 
             let url = process.env.NEXT_PUBLIC_API_DOMAIN + 'api/upload/homestay'
             const res = await fetch(url,{
                 method:"POST",
                 body:imageData
             })
             if(res.status==201) {
-                toast.success('File Uploaded Sucessfully')
-            }else {
+                let responseFetch = await res.json()
+                let nameList = responseFetch.fileName
                 setFeilds((prevFeilds)=>({
                     ...prevFeilds,
-                    'homestayImages':oldList
+                    'homestayImages':nameList
                 })) 
+                toast.success("File Uploaded Successfully")
+            }else {
                 toast.error('Problem in File Upload')
             }
         } catch (error) {
-            setFeilds((prevFeilds)=>({
-                    ...prevFeilds,
-                    'homestayImages':oldList
-                })) 
+            console.log(error)
             toast.error('Error in File Upload')
         }finally{
             setModelStatus(false)
@@ -102,21 +96,22 @@ const HomestayForm =  () => {
             }
             const imageData = new FormData();
             
-            let fileName = Date.now()+" " +files[0].name
-            imageData.append(fileName,files[0]);
+            imageData.append(files[0].name,files[0]);
                 
             let url = process.env.NEXT_PUBLIC_API_DOMAIN+'api/upload/signature'
-            setFeilds((prevFeilds)=>({
-                ...prevFeilds,
-                'signature':fileName
-            }))
             
             const res = await fetch(url,{
                 method:"POST",
                 body:imageData
             })
             if(res.status==201) {
-                toast.success('File Uploaded Sucessfully')
+                const responseData = await res.json()
+                const returnedFile = responseData.fileName
+                setFeilds((prevFeilds)=>({
+                    ...prevFeilds,
+                    'signature':returnedFile
+                }))
+                toast.success('File Uploaded Successfully')
             }else {
                 toast.error('Problem in File Upload')
             }
@@ -126,6 +121,158 @@ const HomestayForm =  () => {
             setModelStatus(false)
         }
     }
+    /*const handleHomestayFileSubmit = async (e)=>{
+        e.preventDefault();
+        try {
+            setModelStatus(true)
+            setModelMessage("Uploading Homestay images")
+            if(!files){
+                toast.warning("No file selected")
+                return
+            }
+            const imageData = new FormData();
+            const oldList=feilds.homestayImages
+            const imgLength = oldList.length
+            let checkImageCount=0
+            for(let i=0;i<files.length;i++){
+                if(i+imgLength>4) {
+                    checkImageCount=1
+                    break
+                }
+                imageData.append(files[i]);
+                
+            }
+            if(checkImageCount==1){
+                toast.warning('Only five images are allowed for homestay to upload');
+                return;
+            }
+            let url = process.env.NEXT_PUBLIC_API_DOMAIN + 'api/upload/homestay'
+            
+            const res = await fetch(url,{
+                method:"POST",
+                body:imageData
+            })
+            if(res.status==201) {
+                const responseData = await res.json()
+                const returnedFile = responseData.fileName
+                returnedFile.map((val,index)=>(
+                    oldList.push(val)
+                ));
+                //const userData = sethomeStay(feilds)
+                url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
+                const res2 = await fetch(url,{
+                    method:'PUT',
+                    header:{
+                    "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify({
+                        "homestayImages":oldList,
+                        "modifiedBy":session.user.email
+                    })
+                });
+                
+                if(res2.status==201){
+                    setError(false)
+                    setErrorMessageList(()=>[])
+                    toast.success('Data Updated Successfully')
+                    setImageList(["homestayImages",oldList])
+                    setImageChange(!isImageChange)
+                    console.log('1. Returning after success')
+                }else{
+                    setFeilds((prevFeilds)=>({
+                        ...prevFeilds,
+                        'homestayImages':oldList
+                        
+                    }))
+                    setError(true)
+                    setErrorMessageList(()=>["Problem in Updating Data"])
+                    toast.error('Problem in Updating Data')
+                }
+                
+                toast.success('File Uploaded Sucessfully')
+            }else {
+                setFeilds((prevFeilds)=>({
+                    ...prevFeilds,
+                    'homestayImages':oldList
+                }))
+                toast.error('Problem in File Upload')
+            }
+        } catch (error) {
+            setFeilds((prevFeilds)=>({
+                ...prevFeilds,
+                'homestayImages':oldList
+            }))
+            toast.error('Error in File Upload')
+            console.log('2. Error in uploading',error)
+        }finally{
+            setModelStatus(false)
+        }
+    }
+
+    const handleSignatureFileSubmit = async (e)=>{
+        e.preventDefault();
+        console.log('1. I am inside handle signature file submit ')
+        console.log('2 ',files)
+        try {
+            setModelStatus(true)
+            setModelMessage("Uploading Signature")
+            if(!files){
+                toast.warning("No file selected")
+                return
+            }
+            const imageData = new FormData();
+            
+            imageData.append(files[0]);
+                
+            let url = process.env.NEXT_PUBLIC_API_DOMAIN+'api/upload/signature'
+                     
+            const res = await fetch(url,{
+                method:"POST",
+                body:imageData
+            })
+            console.log('4 Ok till here  ',url)
+            if(res.status==201) {
+                const responseData = await res.json()
+                const fileName = responseData.fileName
+                console.log('5. I am here SGFTER DATA IS SAVED SUCESSFULLY IN DATABASE')
+                //const userData = sethomeStay(feilds)
+                url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
+                const res2 = await fetch(url,{
+                    method:'PUT',
+                    header:{
+                    "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify({
+                        "signature":fileName,
+                        "modifiedBy":session.user.email
+                    })
+                });
+                
+                if(res2.status==201){
+                    console.log('6. File is loaded SUCESSFULLY')
+                    setError(false)
+                    setErrorMessageList(()=>[])
+                    toast.success('Data Updated Successfully')
+                    setImageList(["signature",fileName])
+                    setImageChange(!isImageChange)
+                }else{
+                    console.log('7. I am here in error after file is loaded')
+                    setError(true)
+                    setErrorMessageList(()=>["Problem in Updating Data"])
+                    toast.error('Problem in Updating Data')
+                }
+                toast.success('File Uploaded Sucessfully')
+            }else {
+                console.log('8. I am here in after DATA LOADING FAILED file is loaded')
+                toast.error('Problem in File Upload')
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('Error in File Upload') 
+        }finally{
+            setModelStatus(false)
+        }
+    }*/
     
     const handleAttractionTextChange = (e,i)=>{
             e.preventDefault()

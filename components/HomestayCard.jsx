@@ -22,7 +22,7 @@ const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
         <div className="w-full flex  flex-col justify-center bg-white rounded-t-xl shadow-md relative  hover:drop-shadow-md hover:shadow-green-600">
             { data.homestayImages.length>0 &&
                 <Image
-                    src={'/homestay/'+data.homestayImages[0]}
+                    src={data.homestayImages[0]}
                     alt="" height={0} width={0} sizes='100vw'            
                     className="w-full h-60 rounded-t-xl" priority
                 />
