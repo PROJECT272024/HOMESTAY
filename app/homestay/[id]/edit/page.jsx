@@ -170,7 +170,6 @@ const HomestayEditForm =  ({params}) => {
             let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
             let res = await fetch(url,{
                 method:'PUT',
-                mode: 'no-cors',
                 header:{
                 "Content-Type":"application/json"
                 },
@@ -183,7 +182,6 @@ const HomestayEditForm =  ({params}) => {
                 url =  `${process.env.NEXT_PUBLIC_API_DOMAIN}api/upload/signature/del/`   
                 res =  await fetch(url,{
                     method:'POST',
-                    mode: 'no-cors',
                     header:{
                     "Content-Type":"application/json"
                     },
@@ -249,7 +247,6 @@ const HomestayEditForm =  ({params}) => {
             let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
             let res = await fetch(url,{
                 method:'PUT',
-                mode: 'no-cors',
                 header:{
                 "Content-Type":"application/json"
                 },
@@ -263,7 +260,6 @@ const HomestayEditForm =  ({params}) => {
                 url =  `${process.env.NEXT_PUBLIC_API_DOMAIN}api/upload/homestay/del/`   
                 res =  await fetch(url,{
                     method:'POST',
-                    mode: 'no-cors',
                     header:{
                     "Content-Type":"application/json"
                     },
@@ -341,7 +337,6 @@ const HomestayEditForm =  ({params}) => {
             
             const res = await fetch(url,{
                 method:"POST",
-                mode: 'no-cors',
                 body:imageData
             })
             if(res.status==201) {
@@ -350,7 +345,6 @@ const HomestayEditForm =  ({params}) => {
                 url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
                 const res = await fetch(url,{
                     method:'PUT',
-                    mode: 'no-cors',
                     header:{
                     "Content-Type":"application/json"
                     },
@@ -419,7 +413,6 @@ const HomestayEditForm =  ({params}) => {
                      
             const res = await fetch(url,{
                 method:"POST",
-                mode: 'no-cors',
                 body:imageData
             })
             console.log('4 Ok till here  ',url)
@@ -429,7 +422,6 @@ const HomestayEditForm =  ({params}) => {
                 url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
                 const res = await fetch(url,{
                     method:'PUT',
-                    mode: 'no-cors',
                     header:{
                     "Content-Type":"application/json"
                     },
@@ -1204,7 +1196,6 @@ const HomestayEditForm =  ({params}) => {
                 let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`
                 const res = await fetch(url,{
                     method:'PUT',
-                    mode: 'no-cors',
                     header:{
                     "Content-Type":"application/json"
                     },
@@ -1305,7 +1296,6 @@ const HomestayEditForm =  ({params}) => {
             }));
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`,{
               method:"PUT",
-              mode: 'no-cors',
               header:{
                 "Content-Type":"application/json"
               },
@@ -1345,7 +1335,6 @@ const HomestayEditForm =  ({params}) => {
             const userData = setBlockC(feilds)
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`,{
                 method:"PUT",
-                mode: 'no-cors',
                 header:{
                   "Content-Type":"application/json"
                 },
@@ -1410,7 +1399,6 @@ const HomestayEditForm =  ({params}) => {
             const userData = setBlockD(feilds)
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`,{
                 method:"PUT",
-                mode: 'no-cors',
                 header:{
                   "Content-Type":"application/json"
                 },
@@ -1488,7 +1476,6 @@ const HomestayEditForm =  ({params}) => {
             const userData = setBlockE(feilds)
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`,{
                 method:"PUT",
-                mode: 'no-cors',
                 header:{
                   "Content-Type":"application/json"
                 },
@@ -1559,7 +1546,6 @@ const HomestayEditForm =  ({params}) => {
             
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${id}`,{
                 method:"PUT",
-                mode: 'no-cors',
                 header:{
                   "Content-Type":"application/json"
                 },

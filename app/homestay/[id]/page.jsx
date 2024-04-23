@@ -11,8 +11,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
   const getData = async()=>{
     try {
       const url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/${params.id}`
-      const response = await fetch(url,{ 
-        mode: 'no-cors',
+      const response = await fetch(url,{
         cache: 'no-store' 
       }); // {next: { revalidate: 120 }2minutes
       console.log(url)
