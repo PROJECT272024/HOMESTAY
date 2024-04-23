@@ -1,18 +1,7 @@
 export {default} from "next-auth/middleware";
-import { NextResponse } from 'next/server'
-import { getSession } from 'next-auth/react'
+import { NextResponse } from 'next/server';
 
-export  async function middleware(req) {
-  const session = await getSession({ req })
-
-  if (!session) {
-    return NextResponse.redirect('/')
-  }
-
-  // If the user is authenticated, continue to the requested page
-  return NextResponse.next()
-}
-/*export function middleware(request) {
+export function middleware(request) {
     if (request.nextUrl.pathname.startsWith('/_next')) {
       const locale = request.nextUrl.locale || i18n.defaultLocale
       request.nextUrl.searchParams.set('lang', locale)
@@ -21,5 +10,5 @@ export  async function middleware(req) {
     }
     return NextResponse.next()
   }
-*/
+
 export const config = {matcher:["/homestay/:path*",'/user/:path*']};
