@@ -44,7 +44,6 @@ const SearchOption = () => {
         }
       let res = await fetch(url,{
           method:'POST',
-          mode: 'no-cors',
           header:{
           "Content-Type":"application/json"
           },
@@ -105,7 +104,6 @@ const SearchOption = () => {
         let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/search`
         let res = await fetch(url,{
           method:'POST',
-          mode: 'no-cors',
           header:{
           "Content-Type":"application/json"
           },
@@ -345,8 +343,7 @@ const SearchOption = () => {
       try {
         let url = `${process.env.NEXT_PUBLIC_API_DOMAIN}api/hs/search`
         let res = await fetch(url,{
-          method:'POST',
-          mode: 'no-cors',          
+          method:'POST',         
           header:{
           "Content-Type":"application/json"
           },
