@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation'
 const HomestayLayout = async ({ children}) => {
   const session = await getServerSession(authOptions)
   if(!session || !(session?.user)){
-    redirect("/",'replace')
+      redirect("/",'replace');
   }
   return (
     <div className='flex flex-col min-h-screen relative'>
