@@ -38,7 +38,7 @@ export default function App() {
           </Link>
         </NavbarBrand>
         <NavbarItem className="hover:border-b-2 hover:border-white">
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/aboutus">
             About
           </Link>
         </NavbarItem>
@@ -46,18 +46,18 @@ export default function App() {
           <div className="relative" onClick={()=>setDropdownOpen(!dropdownOpen)}>
             <button className=" flex items-center"><div className="mr-2">HomeStay</div> {dropdownOpen?<FaAngleUp/>:<FaAngleDown/>}</button>
             {dropdownOpen&& <div className=" bg-green-700 flex flex-col gap-3 absolute top-6 left-0 border-x-1 border-b-1 border-white p-2">
-              <Link href="/homestay/add" className="hover:border-b-2 hover:border-white">Add Homestay</Link>
-              <Link href="/homestay" className="hover:border-b-2 hover:border-white">View Homestay</Link>
+              <Link href="/homestay/add" className="hover:border-b-2 hover:border-white" onClick={()=>setDropdownOpen(false)}>Add Homestay</Link>
+              <Link href="/homestay" className="hover:border-b-2 hover:border-white" onClick={()=>setDropdownOpen(false)}>View Homestay</Link>
             </div>}
           </div>
         </NavbarItem>
         <NavbarItem className="hover:border-b-2 hover:border-white">
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/homestay/analysis">
             Analytics
           </Link>
         </NavbarItem>
         <NavbarItem className="hover:border-b-2 hover:border-white">
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/contactus">
             Contact Us
           </Link>
         </NavbarItem>

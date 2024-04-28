@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from 'next/link';
 import { FaRegEdit,FaTrashAlt,FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { URLSearchParams } from 'url';
+import uttarey from '@/public/images/uttarey.jpg'
 
 const IndividualHomeStay = async ({params,searchParams }) => {
   const query = new URLSearchParams(searchParams).get('q');
@@ -42,8 +43,15 @@ const IndividualHomeStay = async ({params,searchParams }) => {
       {final &&
 
         <main className='flex flex-col gap-2'>
-          <div className='flex w-full h-72 bg-green-200'>
-            This Section contains homestay images
+          <div className='flex w-full h-96 bg-green-200'>
+            <Image
+              src={uttarey}
+              alt=''
+              className='h-full'
+              width={'1800'}
+              height={400}
+              priority={true}
+            />
           </div>
           <div id="mainContent" className='flex flex-col mx-6 gap-2'>
             <div className='grid grid-cols-1'>

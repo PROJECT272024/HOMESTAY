@@ -2,7 +2,7 @@
 import React, { useState} from 'react'
 import homeStay, { setBlockA, setBlockB, setBlockE, setBlockF, setBlockG, sethomeStay } from '@/app/model/HomeStayStructure';
 import { district ,getConstituency} from '@/utils/district-constituency';
-import HomeStayFromSelector from '@/components/HomeStayFromSelector';
+import HomeStayFromSelector from '@/app/homestay/_components/HomeStayFromSelector';
 import RadioGroupTypeStyle from '@/components/formfields/RadioGroupTypeStyle'
 import InputTextStyle from '@/components/formfields/InputTypeStyle';
 import DropDownTypeStyle from '@/components/formfields/DropDownTypeStyle';

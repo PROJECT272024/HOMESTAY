@@ -1,49 +1,80 @@
 'use client'
-import React from 'react'
-import { Pie } from 'react-chartjs-2';
-import 'chart.js/auto';
+import { PieChart, Pie, Cell, ResponsiveContainer,Tooltip,Legend } from 'recharts';
+import { FaSquareFull } from 'react-icons/fa';
 
-const test = {
-    A: {
-      male: 20,
-      female: 10,
+
+const COLORS = ['#0088FE', '#00C49F', '#121212', '#F08042','#AA0042','#AA8000','#e74c3c'];
+
+const CustomTooltip = ({ active, payload}) => {
+  
+  if (active && payload && payload.length) {
+    let per=0
+    let total = payload[0].payload.total
+    if(total==0){ 
+      per=0
+    }else{ 
+      per= ((payload[0].value/payload[0].payload.total)*100)
     }
-  };
+    return (
+      <div className="custom-tooltip bg-gray-50 p-2">
+        <p className={`desc text-[${payload[0].payload.fill}]`}>
+          {`${payload[0].payload.x} - ${payload[0].value} - ${Math.round(per)}%`}
+        </p>
+      </div>
+    );
+  }
 
-const labels = Object.keys(test).flatMap((key) => [' male',' female']);
-const data = Object.values(test).flatMap((value) => [value.male, value.female]);
-
-const dataPie = {
-  labels,
-  datasets: [
-    {
-      label: 'Population',
-      data,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
+  return null;
 };
 
+const CustomLegend = ({ payload}) => {
+  
+  if (payload && payload.length) {
+    return (
+      <div className="flex flex-wrap justify-center items-center">
+        {
+          payload.map((entry,index)=>(
+            <div key={index} className='flex justify-center items-center'>
+                <FaSquareFull className='mx-2' size={12} color={entry.payload.fill}/>
+                <div className='mx-2' key={index}>
+                  {entry.payload.x}
+                </div>
+            </div>
+          ))
+        }
+      </div>
+    );
+  }
 
-const PieChartTemplate = () => {
+  return null;
+};
+
+const PieChartTemplate = ({dataSet}) => {
+  
   return (
-    <Pie data={dataPie} />
+    <div style={{position: 'relative', width: '100%', paddingBottom: '0px'}}>
+      <div className=''>
+      <ResponsiveContainer  aspect={1} height={300} width='100%' minHeight={300} minWidth='100%'
+          maxHeight={300} maxWidth='100%'>
+            <PieChart width={300} height={300}>
+              <Pie
+                dataKey="y"
+                isAnimationActive={false}
+                data={dataSet}
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                fill="#8884d8">
+                {dataSet.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} label={entry.x} />
+                ))}
+              </Pie>
+              <Legend content={<CustomLegend/>}/>
+              <Tooltip content={<CustomTooltip/>}/>
+            </PieChart>
+          </ResponsiveContainer>
+          </div>
+      </div>
   )
 }
 

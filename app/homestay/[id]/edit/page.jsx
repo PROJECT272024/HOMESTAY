@@ -3,7 +3,7 @@ import React, { useEffect,  useState} from 'react'
 import {Spinner} from "@nextui-org/spinner";
 import homeStay, { setBlockA, setBlockB, setBlockC, setBlockD, setBlockE, setBlockF, sethomeStay } from '@/app/model/HomeStayStructure';
 import { district ,getConstituency} from '@/utils/district-constituency';
-import HomeStayFromSelector from '@/components/HomeStayFromSelector';
+import HomeStayFromSelector from '@/app/homestay/_components/HomeStayFromSelector';
 import RadioGroupTypeStyle from '@/components/formfields/RadioGroupTypeStyle'
 import InputTextStyle from '@/components/formfields/InputTypeStyle';
 import DropDownTypeStyle from '@/components/formfields/DropDownTypeStyle';
