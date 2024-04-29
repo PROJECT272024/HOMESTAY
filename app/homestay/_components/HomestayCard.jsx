@@ -8,7 +8,7 @@ import { FaRegEdit, FaPhoneAlt, FaTrashAlt, FaRegTimesCircle,FaRegCheckCircle   
 const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
     const changeCase=(name)=>{
         let result = ""
-        if(name!=""){
+        if(name){
             const words = name.split(" ");
             for(let word of words){
                 if(isNaN(word[0])){
@@ -28,7 +28,7 @@ const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
         for(let name of org.split("**")){
             let change= false
             name = name.replace(",",'')
-            if(name!=""){
+            if(name){
                 const words = name.split(" ");
                 let val = ''
                 for(let word of words){
