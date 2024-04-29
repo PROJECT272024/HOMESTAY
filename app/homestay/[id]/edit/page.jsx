@@ -18,6 +18,7 @@ import Image from 'next/image';
 import { FaTrashAlt } from 'react-icons/fa';
 import WhiteModal from '@/components/WhiteModal';
 import { createPublicId } from '@/utils/extras';
+import { MdArrowBack,MdArrowForward  } from "react-icons/md";
 
 
 
@@ -1603,7 +1604,7 @@ const HomestayEditForm =  ({params}) => {
     return (
     <section className="w-full p-2 md:w-[90%] grid grid-cols-1 lg:grid-cols-10 gap-1 mx-auto place-content-center">
         
-        <div className="lg:col-span-3 grid grid-cols-1 lg:gap-3 place-content-center p-2 bg-green-800 text-white">
+        <div className="lg:col-span-3 grid grid-cols-1 lg:gap-3 items-start p-2 my-4 bg-green-800 text-white">
             <HomeStayFromSelector number={1} isActive={(activeBlock==1)? 'true':'false'} handler={()=>setActiveBlock(1)} 
                 content={'Block A : IDENTIFICATION PARTICULARS '}/>
             <HomeStayFromSelector number={2} isActive={(activeBlock==2)? 'true':'false' } handler={()=>setActiveBlock(2)}
@@ -1618,6 +1619,20 @@ const HomestayEditForm =  ({params}) => {
                 content={'Block F : RECORD KEEPING , OCCUPANCY DETAILS AND OTHER INFORMATION'}/>
             <HomeStayFromSelector number={7} isActive={(activeBlock==7)? 'true':'false'} handler={()=>setActiveBlock(7)}
                 content={'Block G : FILE UPLOADING'}/>
+            <div className='flex gap-2 items-center justify-between p-2 lg:hidden'>
+                <button onClick={()=>setActiveBlock(activeBlock-1)} disabled={activeBlock==1}>
+                    <div className='flex gap-2 items-center p-2 border-1 border-gray-50 rounded-md hover:border-3 hover:border-white hover:font-bold' >
+                        <MdArrowBack />
+                        <p>Prev Block</p>
+                    </div>
+                </button>
+                <button onClick={()=>setActiveBlock(activeBlock+1)} disabled={activeBlock==7}>
+                    <div className='flex gap-2 items-center p-2 border-1 border-gray-50 rounded-md hover:border-3 hover:border-white hover:font-bold'>
+                        <p>Next Block</p>
+                        <MdArrowForward />
+                    </div>
+                </button>
+            </div>
         </div>
         
         {startLoading && <div className='lg:col-span-7 flex justify-center items-center'><Spinner label="Loading Data..." color="primary" size='lg'/></div>}
@@ -2223,7 +2238,7 @@ const HomestayEditForm =  ({params}) => {
                                 placeholder='Select Homestay Images to Upload' handler={handleSelectFile}/>
                             
                             <button type="submit" className='bg-green-400 
-                            text-white p-2 md:w-64'>Submit File </button>
+                            text-white p-2 md:w-64'>Upload Homestay Image</button>
                         </div>
                         
                     </form>
@@ -2254,7 +2269,7 @@ const HomestayEditForm =  ({params}) => {
                                 placeholder='Select Owner Signature to Upload' handler={handleSelectFile} />
                             
                             <button type="submit" className='bg-green-400 
-                            text-white p-2 md:w-64'>Submit File</button>
+                            text-white p-2 md:w-64'>Upload Signature</button>
                         </div>
                     </form>
                 </div>
