@@ -2006,7 +2006,7 @@ const HomestayForm =  () => {
                             placeholder='Select Homestay Images to Upload' handler={handleSelectFile}/>
                         
                         <button type="submit" className='bg-green-400 
-                        text-white p-2 md:w-64'>Submit File </button>
+                        text-white p-2 md:w-64'>Upload Homestay Images</button>
                     </form>
                 </div>
                 <div>
@@ -2015,7 +2015,7 @@ const HomestayForm =  () => {
                             placeholder='Select Owner Signature to Upload' handler={handleSelectFile} />
                         
                         <button type="submit" className='bg-green-400 
-                        text-white p-2 md:w-64'>Submit File</button>
+                        text-white p-2 md:w-64'>Upload Signature</button>
                     </form>
                 </div>
                 <form onSubmit={handleSubmitBlockG} className="grid grid-cols-1">
