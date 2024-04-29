@@ -23,6 +23,7 @@ const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
     const filterName1=()=>{
         let org = data.address +'**'+ data.mcnpgpuward +'**'+ data.villageOrTown;
         let result = ""
+        org = org.trim()
         
         for(let name of org.split("**")){
             let change= false
@@ -51,7 +52,7 @@ const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
     const filterName2=()=>{
         let org = data.constituency +'**'+ data.district +'**'+ data.state;
         let result = ""
-        
+        org = org.trim()        
         for(let name of org.split("**")){
             let change= false
             if(name!=""){

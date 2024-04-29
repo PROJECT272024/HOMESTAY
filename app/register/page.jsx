@@ -203,13 +203,12 @@ const UserAdd = () => {
           altPhone: feilds.altPhone,
           role: feilds.role, // Admin, DEO - data entry operator
           password:hashedPass,
-          isStatus: 0
+          isStatus: 1
           
         }
         try {
-          const res = await fetch('/api/users',{
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}api/users`,{
             method:"POST",
-            mode: 'no-cors',
             header:{
               "Content-Type":"application/json"
             },
@@ -219,19 +218,20 @@ const UserAdd = () => {
           if(res.status==201){
             setError(false)
             toast.success("Registration done sucessfully.")
-            router.replace(`/`)
+            router.replace('/')
             toast.success('User Registered Successfully')
             router.refresh()
             
           }else{
-            setErrorMessageList.push("Problem in Saving Data")
+            
+            setErrorMessageList(["1. User with email already exits"])
+            toast.error("1. User with email already exits")
             setError(true)
-            toast.error("Problem in storing data")
           }  
         } catch (error) {
-          setErrorMessageList.push("Problem in Registration")
+          setErrorMessageList(["2. Problem in Registration"])
           setError(true)
-          toast.warning("Problem in user registration")
+          toast.warning("2. Problem in user registration")
           
           console.log("Error during registration ",error);
         }finally{
@@ -243,7 +243,7 @@ const UserAdd = () => {
       <div className="m-3 flex justify-center flex-col border-1.5 w-3/4 border-green-300  shadow-md shadow-slate-300 p-3 mx-auto"> 
         
         <h1 className='font-bold'>Registration Form</h1>
-        
+       
         <form  method="POST" className='grid grid-cols-1 lg:grid-cols-2 gap-2  items-center '
           onSubmit={handleSubmitData}>
             <div className="my-1 lg:col-span-2 h-px bg-gray-200 shadow-md" />
@@ -291,10 +291,10 @@ const UserAdd = () => {
             <InputTextStyle id='email' name='email' required='true'   
               value={feilds.email} placeholder='Enter Email Address' handler={handleChange}/>
 
-            <InputNumberTextStyle id='phone' name='phone'  value={feilds.phone} 
+            <InputNumberTextStyle id='phone' name='phone'  value={feilds.phone} required='true'  
               placeholder='Enter Phone Number' handler={handleTextNumberChange}/>
 
-            <InputNumberTextStyle id='altPhone' name='altPhone' required='true'   
+            <InputNumberTextStyle id='altPhone' name='altPhone'   
               readonly='false' value={feilds.altPhone} placeholder='Enter Alternative Phone Number' handler={handleTextNumberChange}/>
             
             <RadioGroupTypeStyle id="role" name="role"
