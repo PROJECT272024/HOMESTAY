@@ -32,11 +32,11 @@ const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
                 const words = name.split(" ");
                 let val = ''
                 for(let word of words){
-                    if(isNaN(word[0])){
-                            val = word[0].toUpperCase() + word.substring(1).toLowerCase()+ " "; 
-                    }else{
-                            val = word.trim()+' '; 
+                    if (word.trim()=='') {
+                        continue
                     }
+                    word = word.toString()
+                    val = word[0].toUpperCase() + word.substring(1).toLowerCase()+ " "; 
                     if (!result.includes(val)) {
                         result+=val 
                         change=true
