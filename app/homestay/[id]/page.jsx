@@ -122,7 +122,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
             </div>
             <div className='h-px drop-shadow-sm border-1 border-green-400'></div>
 
-            <div id='detailsofEstablishment' className='grid grid-cols-1 justify-center'>
+            <div id='detailsofEstablishment' className='grid grid-cols-1 justify-center bg-green-50'>
                 <div className='flex justify-center'>
                   <h2 className='font-bold text-blue-600 text-lg'>Details of Establishment</h2>
                 </div>
@@ -234,7 +234,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                         </thead>
                         <tbody>
                           {final.nearByAttraction.map((val,index)=>(
-                              <tr key={index} className={`border-b-1 border-black  ${index%2==0?'':'bg-slate-200'}`}>
+                              <tr key={index} className={`border-b-1 border-black  ${index%2==0?'':'bg-gray-100'}`}>
                                 <td>{val.name}</td> 
                                 <td>{val.distance}</td> 
                               </tr> 
@@ -248,7 +248,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
             </div>
             {/* activities end */}
             <div className='h-px drop-shadow-sm border-1 border-green-400'></div>
-            <div id='facilities' className='grid grid-cols-1'>
+            <div id='facilities' className='grid grid-cols-1 bg-green-50'>
             
               <div  className='flex justify-center'>
                   <h2 className='font-bold text-blue-600 text-lg'>Facilities</h2>
@@ -283,7 +283,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                             <td>{final.wasteDisposal.isYesorNo}</td>
                             <td>{final.wasteDisposal.isYesorNo=='Yes'?final.wasteDisposal.description:''}</td>
                           </tr> 
-                          <tr className='border-b-1 border-black bg-slate-200'>
+                          <tr className='border-b-1 border-black bg-gray-100'>
                             <td>Safe Drinking Water</td>
                             <td>{final.drinkingWater.isYesorNo}</td>
                             <td>{final.drinkingWater.isYesorNo=='Yes'?final.drinkingWater.description:''}</td>
@@ -293,7 +293,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                             <td>{final.firstAid.isYesorNo}</td>
                             <td>{final.firstAid.isYesorNo=='Yes'?final.firstAid.description:''}</td>
                           </tr> 
-                          <tr className='border-b-1 border-black bg-slate-200'>
+                          <tr className='border-b-1 border-black bg-gray-100'>
                             <td>Eco Friendly / Sustainable Practices</td>
                             <td>{final.ecoFriendly.isYesorNo}</td>
                             <td>{final.ecoFriendly.isYesorNo=='Yes'?final.ecoFriendly.description:''}</td>
@@ -336,7 +336,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                           <td>{final.makeMyTrip.isRegistered}</td>
                           <td>{final.makeMyTrip.isRegistered=='Yes'?final.makeMyTrip.percentage:''}</td>
                         </tr> 
-                        <tr className='border-b-1 border-black bg-slate-200'>
+                        <tr className='border-b-1 border-black bg-gray-100'>
                           <td>Agoda</td>
                           <td>{final.agoda.isRegistered}</td>
                           <td>{final.agoda.isRegistered=='Yes'?final.agoda.percentage:''}</td>
@@ -346,7 +346,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                           <td>{final.airBnb.isRegistered}</td>
                           <td>{final.airBnb.isRegistered=='Yes'?final.airBnb.percentage:''}</td>
                         </tr> 
-                        <tr className='border-b-1 border-black bg-slate-200'>
+                        <tr className='border-b-1 border-black bg-gray-100'>
                           <td>Go Ibibo</td>
                           <td>{final.goIbibo.isRegistered}</td>
                           <td>{final.goIbibo.isRegistered=='Yes'?final.goIbibo.percentage:''}</td>
@@ -367,7 +367,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
             </div>
             {/* OTA ENDS */}
             <div className='h-px drop-shadow-sm border-1 border-green-400'></div>
-            <div id='record' className='grid grid-cols-1 gap-2'>
+            <div id='record' className='grid grid-cols-1 gap-2 bg-green-50'>
                 <div className='flex justify-center'>
                       <p className='font-bold text-blue-600 text-lg'>Other Information</p>
                 </div>
