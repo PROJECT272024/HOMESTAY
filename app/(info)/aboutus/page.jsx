@@ -20,19 +20,25 @@ const AboutUs  = () => {
                     priority={true}
                     />
                 </div>
-                <div className='md:w-full px-2'>
+                <div className='md:w-full px-2 flex flex-col gap-2'>
                     <p className='text-justify'>
                         Sikkim (/ˈsɪkɪm/) is a state in northeastern India. It borders Tibet in the north and northeast, Bhutan in the east, Nepal 
                         in the west, and West Bengal in the south. Sikkim is also located close to India's Siliguri Corridor near Bangladesh. 
                         Sikkim is the least populous and second smallest among the Indian states. A part of the Eastern Himalaya, Sikkim is notable 
                         for its biodiversity, including alpine and subtropical climates, as well as being a host to Kangchenjunga, 
                         the highest peak in India and third highest on Earth. Sikkim's capital and largest city is Gangtok. 
-                        Almost 35% of the state is covered by the Khangchendzonga National Park. The Kingdom of Sikkim was founded by the Namgyal 
+                        Almost 35% of the state is covered by the Khangchendzonga National Park. 
+                    </p>
+                    <p className='text-justify'>
+                        The Kingdom of Sikkim was founded by the Namgyal 
                         dynasty in the 17th century. It was ruled by a Buddhist priest-king known as the Chogyal. It became a princely 
                         state of British India in 1890. After 1947, Sikkim continued its protectorate status with the Republic of India. 
                         It enjoyed the highest literacy rate and per capita income among Himalayan states. In 1973, anti-royalist riots 
                         took place in front of the Chogyal's palace. In 1975, the monarchy was deposed by the people. A referendum in 1975 
-                        led to Sikkim joining India as its 22nd state. Modern Sikkim is a multiethnic and multilingual Indian state. 
+                        led to Sikkim joining India as its 22nd state. 
+                    </p>
+                    <p className='text-justify'>
+                        Modern Sikkim is a multiethnic and multilingual Indian state. 
                         The official languages of the state are English, Nepali, Sikkimese and Lepcha. Additional official languages include 
                         Gurung, Limbu, Magar, Mukhia, Newari, Rai, Sherpa and Tamang for the purpose of preservation of culture and tradition 
                         in the state. English is taught in schools and used in government documents. The predominant religions are Hinduism 
@@ -42,8 +48,8 @@ const AboutUs  = () => {
                     </p>
                     <p className='text-justify'>
                         To flourish tourism in the state the Department of Tourism and Civil Aviation has the key reponsibility. The Department
-                        is responsible for attracting tourism. They are needed to identify the spot for tourism, making place hospitable for tourist,
-                        celebrating festival, conducting awareness program amongs local and to assists guest for registration and other purposes
+                        is responsible for attracting tourism by identify the spot for tourism, making place hospitable for tourist,
+                        celebrating festival, conducting awareness program amongs local and to assists guest for registration and other purposes.
                     </p>
                 </div>
             </div>
