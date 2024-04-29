@@ -23,6 +23,20 @@ const SearchOption = () => {
   
   const containerRef = useRef()
 
+  const project = {
+    state:1,
+    district:1,
+    constituency:1,
+    villageOrTown:1,
+    mcnpgpuward:1,
+    address:1,
+    homestayName:1,
+    manager:1,
+    contact:1,
+    isRegisteredWithLocal:1,
+    isRegistredWithDot:1,
+    homestayImages:1,
+  }
 
   const regType = ['With DOT&CAV','With Local',
   'Not with DOT&CAV','Not with Local'];
@@ -39,7 +53,8 @@ const SearchOption = () => {
       const pageSize = 6
       const input = {
         "query":query,
-        "offset":((pageNumb-1)* pageSize)                   ,
+        "project":project,
+        "offset":((pageNumb-1)* pageSize),
         "pageSize":pageSize
         }
       let res = await fetch(url,{
