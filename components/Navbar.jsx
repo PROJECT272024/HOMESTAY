@@ -12,6 +12,10 @@ export default function App() {
   const [dropdownOpen,setDropdownOpen]=useState(false)
   
   const handleClick = ()=>{setIsMenuOpen(false)}
+  const largeScreenMenuClick = ()=>{
+    if(dropdownOpen)
+      setDropdownOpen(false)
+  }
   return (
     <Navbar
       isBordered
@@ -33,12 +37,12 @@ export default function App() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-          <Link color="foreground" href="/homestay">
+          <Link color="foreground" href="/homestay" onClick={largeScreenMenuClick}>
             <p className="font-bold text-inherit mr-5">Sikkim HomeStay</p>
           </Link>
         </NavbarBrand>
         <NavbarItem className="hover:border-b-2 hover:border-white">
-          <Link color="foreground" href="/aboutus">
+          <Link color="foreground" href="/aboutus" onClick={largeScreenMenuClick}>
             About
           </Link>
         </NavbarItem>
@@ -46,18 +50,18 @@ export default function App() {
           <div className="relative" onClick={()=>setDropdownOpen(!dropdownOpen)}>
             <button className=" flex items-center"><div className="mr-2">HomeStay</div> {dropdownOpen?<FaAngleUp/>:<FaAngleDown/>}</button>
             {dropdownOpen&& <div className=" bg-green-700 flex flex-col gap-3 absolute top-6 left-0 border-x-1 border-b-1 border-white p-2">
-              <Link href="/homestay/add" className="hover:border-b-2 hover:border-white" onClick={()=>setDropdownOpen(false)}>Add Homestay</Link>
-              <Link href="/homestay" className="hover:border-b-2 hover:border-white" onClick={()=>setDropdownOpen(false)}>View Homestay</Link>
+              <Link href="/homestay/add" className="hover:border-b-2 hover:border-white" onClick={largeScreenMenuClick}>Add Homestay</Link>
+              <Link href="/homestay" className="hover:border-b-2 hover:border-white" onClick={largeScreenMenuClick}>View Homestay</Link>
             </div>}
           </div>
         </NavbarItem>
         <NavbarItem className="hover:border-b-2 hover:border-white">
-          <Link color="foreground" href="/homestay/analysis">
+          <Link color="foreground" href="/homestay/analysis" onClick={largeScreenMenuClick}>
             Analytics
           </Link>
         </NavbarItem>
         <NavbarItem className="hover:border-b-2 hover:border-white">
-          <Link color="foreground" href="/contactus">
+          <Link color="foreground" href="/contactus" onClick={largeScreenMenuClick}>
             Contact Us
           </Link>
         </NavbarItem>
@@ -74,7 +78,7 @@ export default function App() {
 
       <NavbarMenu className="text-lg">
         <NavbarMenuItem className="hover:border-b-2 hover:border-white flex justify-center">
-            <Link color="foreground" href="#" onClick={handleClick}>
+            <Link color="foreground" href="/aboutus" onClick={handleClick}>
               About
             </Link>
           </NavbarMenuItem>
@@ -91,12 +95,12 @@ export default function App() {
             
           </NavbarMenuItem>
           <NavbarMenuItem className="hover:border-b-2 hover:border-white flex justify-center">
-            <Link color="foreground" href="#" onClick={handleClick}>
+            <Link color="foreground" href="/homestay/analysis" onClick={handleClick}>
               Analytics
             </Link>
           </NavbarMenuItem>
           <NavbarMenuItem className="hover:border-b-2 hover:border-white flex justify-center">
-            <Link color="foreground" href="#" onClick={handleClick}>
+            <Link color="foreground" href="/contactus" onClick={handleClick}>
               Contact Us
             </Link>
           </NavbarMenuItem>
