@@ -19,7 +19,7 @@ const SearchOption = () => {
   const [selectType,setSelectType]=useState("")
   const [selectGender,setGender]=useState("")
   const [selectRegistration,setSelectRegistration]=useState("")
-  const [isLoading,setIsLoading]=useState(false)
+  const [isLoading,setIsLoading]=useState(true)
   
   const containerRef = useRef()
 
@@ -525,9 +525,9 @@ const SearchOption = () => {
           </div>
         </section>
         <div  className='h-0 w-0' >
-          <input type="text" ref={containerRef}  className='h-full w-full' />
+          <button ref={containerRef}  className='h-full w-full' ></button>
         </div>
-        <section>
+        <section >
           <HomestayContainer data={orgResults} setDelete={handleDelete}  
             isLoading={isLoading} setIsLoading={setIsLoading} pageNo={pageNo} 
             setPageNo={(prev)=>setPageNo()} totalItems={totalItems} onPageChange={handlePageChange}/>

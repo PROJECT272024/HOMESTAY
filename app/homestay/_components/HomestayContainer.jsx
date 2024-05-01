@@ -7,7 +7,6 @@ import { Pagination } from '@/components/Pagination'
 import HomestayCard from './HomestayCard'
 
 const HomestayContainer = ({data:homestays,setDelete,pageNo,setPageNo,totalItems,isLoading,setIsLoading,onPageChange}) => {
-    console.log("I am from homestay container",homestays)
     const [isChange,setChange]=useState(true)
     const [status,setStatus]=useState(false)
     const router = useRouter()
