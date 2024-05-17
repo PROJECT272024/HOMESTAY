@@ -66,6 +66,7 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
         toast.success('Homestay Deleted Sucessfully')
       }
       setProcessing(false)
+      
     }
     callDelete()
   }

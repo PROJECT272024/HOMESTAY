@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import FileUploadStyle from '@/components/formfields/FileUploadStyle';
 import WhiteModal from '@/components/WhiteModal';
 import DateInputTextStyle from '@/components/formfields/DateInputTypeStyle';
+import { revalidatePath } from 'next/cache';
 
 const HomestayForm =  () => {
     const [feilds,setFeilds]=useState(homeStay)
@@ -979,6 +980,8 @@ const HomestayForm =  () => {
             if(res.status==201){
                 router.replace(`/homestay/${homeStayId}`)
                 toast.success('Homestay added Successfully')
+                
+                
                 router.refresh()
                 
             }else{
@@ -1056,6 +1059,7 @@ const HomestayForm =  () => {
                 }
                 
             }catch(error){
+                console.log(error)
                 setError(true)
                 setErrorMessageList(()=>['Problem in inserting'])
                 toast.error('Problem in Inserting Data')
@@ -1153,6 +1157,8 @@ const HomestayForm =  () => {
               setError(false)
               setErrorMessageList(()=>[])
               setActiveBlock(3)
+              
+                
               toast.success("Data Saved Sucessfully")
             }else{
                 
@@ -1206,6 +1212,8 @@ const HomestayForm =  () => {
           }*/
 
           setActiveBlock(4)
+          
+          
           toast.success("Data Saved Sucessfully")
       }
       const handleSubmitBlockD = async (e)=>{
@@ -1239,6 +1247,8 @@ const HomestayForm =  () => {
           setError(true)
           setErrorMessageList(message)
           setModelStatus(false)
+          
+          
           toast.error("Provide value to all required feilds")
         }else{
           
@@ -1328,6 +1338,8 @@ const HomestayForm =  () => {
             if(res.status==201){
               setError(false)
               setErrorMessageList(()=>[])
+              
+              
               setActiveBlock(6)
             }else{
               setError(true)
@@ -1387,6 +1399,8 @@ const HomestayForm =  () => {
               setErrorMessageList(()=>[])
               setError(false)
               setActiveBlock(7)
+              
+              
               toast.success("Data added sucessfully")
               
             }else{

@@ -41,13 +41,12 @@ const ListView  = async () => {
       
       const input = {
         "query":query,
-        "project":project,
-        "sort":'createdOn',
+        "project":project
 
       }
       let res = await fetch(url,{
           method:'POST',
-          cache:'force-cache',
+          cache:'no-cache',
           header:{
           "Content-Type":"application/json"
           },

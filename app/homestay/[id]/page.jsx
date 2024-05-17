@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { FaRegEdit,FaTrashAlt,FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { URLSearchParams } from 'url';
 import uttarey from '@/public/images/uttarey.jpg'
+import DeleteButton from '../_components/DeleteButton';
+import { deleteHomestay } from '@/actions/homestay';
 
 const IndividualHomeStay = async ({params,searchParams }) => {
   const query = new URLSearchParams(searchParams).get('q');
@@ -33,7 +35,6 @@ const IndividualHomeStay = async ({params,searchParams }) => {
   const datas = await getData();
   const final = await datas
   return (
-
     <>
       {
         !final  && <div className='flex justify-center'>
@@ -67,11 +68,7 @@ const IndividualHomeStay = async ({params,searchParams }) => {
                       hover:drop-shadow-md hover:bg-blue-800'>
                       <FaRegEdit className='font-bold sm:mr-2'/> <span className='hidden sm:flex'>Edit</span>
                   </Link>
-                  <Link href={`/homestay/${params.id}/remove`} className='p-2 sm:w-20 flex flex-row items-center 
-                    justify-center bg-red-600 mr-2 rounded-lg 
-                      hover:drop-shadow-md hover:bg-red-800'>
-                      <FaTrashAlt  className='font-bold sm:mr-2'/> <span className='hidden sm:flex'>Delete</span>
-                  </Link>
+                  <DeleteButton handleDelete={deleteHomestay} id={params.id}/>
               </div>
               <h1 className='font-bold text-blue-700 text-4xl'>{final.homestayName}</h1>
             </div>

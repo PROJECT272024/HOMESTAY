@@ -10,10 +10,12 @@ export const POST = async (res)=>{
         if('project' in data){
             if('offset' in data){
                 result = await homeStay.find(data.query,data.project)
+                        .sort({createdOn: -1})
                         .skip(data.offset)
                         .limit(data.pageSize);
             }else{
                 result = await homeStay.find(data.query,data.project)
+                        .sort({createdOn: -1})
             }
         }else{
             if('offset' in data){

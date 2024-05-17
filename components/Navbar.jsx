@@ -51,6 +51,7 @@ export default function App() {
             <button className=" flex items-center"><div className="mr-2">HomeStay</div> {dropdownOpen?<FaAngleUp/>:<FaAngleDown/>}</button>
             {dropdownOpen&& <div className=" bg-green-700 flex flex-col gap-3 absolute top-6 left-0 border-x-1 border-b-1 border-white p-2">
               <Link href="/homestay/add" className="hover:border-b-2 hover:border-white" onClick={largeScreenMenuClick}>Add Homestay</Link>
+              <Link href="/homestay/listview" className="hover:border-b-2 hover:border-white" onClick={largeScreenMenuClick}>ListView Homestay</Link>
               <Link href="/homestay" className="hover:border-b-2 hover:border-white" onClick={largeScreenMenuClick}>View Homestay</Link>
             </div>}
           </div>
@@ -89,6 +90,7 @@ export default function App() {
               </div>
               {dropdownOpen&& <div className="flex flex-col gap-3 p-2">
                   <Link href="/homestay/add" className="hover:border-b-2 hover:border-white" onClick={handleClick}>Add Homestay</Link>
+                  <Link href="/homestay/listview" className="hover:border-b-2 hover:border-white" onClick={handleClick}>ListView Homestay</Link>
                   <Link href="/homestay" className="hover:border-b-2 hover:border-white" onClick={handleClick}>View Homestay</Link>
                 </div>}
             </div>

@@ -63,6 +63,7 @@ const homeStay = {
     signature:"",
     homestayImages:[],
     isStatus: 1,
+    createdOn: new Date().toISOString().slice(0, 10),
     createdBy:null,
     modifiedBy: null
 }
@@ -137,6 +138,7 @@ export const sethomeStay = (feilds)=>{
         signature:"",
         homestayImages:[],
         isStatus: 1,
+        createdOn: new Date().toISOString().slice(0, 10),
         createdBy:null,
         modifiedBy: null
     }
