@@ -121,29 +121,37 @@ const makeDataSet =  (data)=>{
             { x: 'Normal', y: result.normal, total: result.total},
             { x: 'Heritage', y: result.heritage, total: result.total }
           ],
+          
           stackedtype2: [
             { 
               name: 'Type I',
               x: result.rular,
               label1: 'Rular',
+              color1: '#F8B195',
               y: result.urban,
               label2: 'Urban',
+              color2: '#56C596',
               total: result.total
+
             },
             {
               name: 'Type II',
               x: result.government,
               label1: 'Government',
+              color1: '#99B898',
               y: result.private,
               label2: 'Private',
+              color2: '#534666',
               total: result.total
             },
             {
               name: 'Type III',
               x: result.normal,
               label1: 'Normal',
+              color1: '#83AF9B',
               y: result.heritage,
               label2: 'Heritage',
+              color2: '#F67280',
               total: result.total
             }
           ],
@@ -175,6 +183,7 @@ const makeDataSet =  (data)=>{
             { x: 'With Local', y: result.regWithLocal, total: result.total},
             { x: 'Not With Local', y: result.regNotWithLocal, total: result.total },
           ],
+          
           stackedRegistration: [
             { 
               name: 'DOT&CAV',
@@ -182,7 +191,9 @@ const makeDataSet =  (data)=>{
               label1: 'Registered',
               y: result.regNotWithDot,
               label2: 'Not Registered',
-              total: result.total
+              total: result.total,
+              color1: '#F8B195', 
+              color2: '#56C596',
             },
             {
               name: 'Local',
@@ -190,7 +201,9 @@ const makeDataSet =  (data)=>{
               label1: 'Registered',
               y: result.regNotWithLocal,
               label2: 'Not Registered',
-              total: result.total
+              total: result.total,
+              color1: '#99B898',
+              color2: '#83AF9B',
             }
           ]
     }
