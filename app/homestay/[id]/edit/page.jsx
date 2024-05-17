@@ -97,7 +97,7 @@ const HomestayEditForm =  ({params}) => {
 
     useEffect(()=>{
         if(isChange){
-            let allBtn = [['isUrbanOrRular',feilds.isUrbanOrRular],['isPrivateOrGovt',feilds.isPrivateOrGovt],
+            let allBtn = [['isUrbanOrRural',feilds.isUrbanOrRural],['isPrivateOrGovt',feilds.isPrivateOrGovt],
                         ['isNormalOrHeritage',feilds.isNormalOrHeritage],['gender',feilds.gender],
                         ['isRegistredWithDot',feilds.isRegistredWithDot],['isRegisteredWithLocal',feilds.isRegisteredWithLocal],
                         ['transportation',feilds.transportation],
@@ -1005,11 +1005,11 @@ const HomestayEditForm =  ({params}) => {
               [name]:value
             }));
           } 
-        /*if(name=='isUrbanOrRular'){
+        /*if(name=='isUrbanOrRural'){
             
             setFeilds((prevFeilds)=>({
                 ...prevFeilds,
-                'isUrbanOrRular':value
+                'isUrbanOrRural':value
                 }
             ));
         }else if(name=='isPrivateOrGovt'){
@@ -1642,10 +1642,10 @@ const HomestayEditForm =  ({params}) => {
                     <fieldset className="border border-solid border-green-300 p-2 bg-white">
                         <h2 className='text-blue-700 font-bold'>Establishment Types</h2>
                         <div className='mt-2  sm:grid sm:grid-cols-3 gap-1'>
-                            <RadioGroupTypeStyle id="isUrbanOrRular" name="isUrbanOrRular"
-                                type='horizontal' value={feilds.isUrbanOrRular}
+                            <RadioGroupTypeStyle id="isUrbanOrRural" name="isUrbanOrRural"
+                                type='horizontal' value={feilds.isUrbanOrRural}
                                 handler={handleRadioChange} title='Type 1'
-                                options={[['Rular','Rular'],['Urban','Urban']]}/>
+                                options={[['Rural','Rural'],['Urban','Urban']]}/>
                             
                             <RadioGroupTypeStyle id="isPrivateOrGovt" name="isPrivateOrGovt"
                                 type='horizontal' value={feilds.isPrivateOrGovt}

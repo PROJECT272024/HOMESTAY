@@ -1,7 +1,7 @@
 const makeDataSet =  (data)=>{
     const result = {
         urban:0,
-        rular:0,
+        rural:0,
         private:0,
         government:0,
         normal:0,
@@ -32,10 +32,10 @@ const makeDataSet =  (data)=>{
     if(data){
       try {
         for(let i of data){      
-          if(i.isUrbanOrRular=='Urban'){
+          if(i.isUrbanOrrural=='Urban'){
               result.urban = result.urban +1
           }else{
-              result.rular = result.rular +1 
+              result.rural = result.rural +1 
           }
           if(i.isPrivateOrGovt=='Private'){
               result.private = result.private +1 
@@ -102,7 +102,7 @@ const makeDataSet =  (data)=>{
     }
     const prepareData = {
         type1: [
-            { x: 'Rular', y: result.rular},
+            { x: 'Rural', y: result.rural},
             { x: 'Urban', y: result.urban }
           ],
           type2: [
@@ -114,7 +114,7 @@ const makeDataSet =  (data)=>{
             { x: 'Heritage', y: result.heritage }
           ],
           type: [
-            { x: 'Rular', y: result.rular, total: result.total},
+            { x: 'Rural', y: result.rural, total: result.total},
             { x: 'Urban', y: result.urban, total: result.total },
             { x: 'Government', y: result.government, total: result.total},
             { x: 'Private', y: result.private, total: result.total },
@@ -125,8 +125,8 @@ const makeDataSet =  (data)=>{
           stackedtype2: [
             { 
               name: 'Type I',
-              x: result.rular,
-              label1: 'Rular',
+              x: result.rural,
+              label1: 'Rural',
               color1: '#F8B195',
               y: result.urban,
               label2: 'Urban',

@@ -40,7 +40,7 @@ const SearchOption = () => {
 
   const regType = ['With DOT&CAV','With Local',
   'Not with DOT&CAV','Not with Local'];
-  const estdType = ['Rular','Urban','Government','Private','Normal','Heritage']
+  const estdType = ['Rural','Urban','Government','Private','Normal','Heritage']
   const genderType = ['Female','Male','Others']; 
   const optionType = ['HomeStay Name','Owner Name','DOT&CAV Registration Number',
     'Local Registration Number','Phone Number']

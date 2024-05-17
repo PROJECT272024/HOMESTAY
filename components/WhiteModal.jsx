@@ -1,5 +1,6 @@
 import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, RadioGroup, Radio, Spinner} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "@nextui-org/modal";
+import {Spinner} from "@nextui-org/spinner";
 
 export default function WhiteModal({status,title}) {
   //const {isOpen, onOpen, onOpenChange} = useDisclosure();

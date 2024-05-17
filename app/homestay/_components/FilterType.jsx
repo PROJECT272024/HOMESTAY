@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 const FilterType = ({setQuery,setCategory}) => {
   const regType = ['With DOT&CAV','With Local',
                 'Not with DOT&CAV','Not with Local'];
-  const estdType = ['Rular','Urban','Government','Private','Normal','Heritage']
+  const estdType = ['Rural','Urban','Government','Private','Normal','Heritage']
   const genderType = ['Female','Male','Others']; 
   const [selectDistrict,setSelectDistrict] = useState('')
   const [selectType,setSelectType] = useState('')
