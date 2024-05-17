@@ -1,6 +1,5 @@
 import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "@nextui-org/modal";
-import {Spinner} from "@nextui-org/spinner";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, RadioGroup, Radio, Spinner} from "@nextui-org/react";
 
 export default function WhiteModal({status,title}) {
   //const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -13,12 +12,15 @@ export default function WhiteModal({status,title}) {
         placement='center'
         isDismissable={false}
         hideCloseButton={true}
+        size="xs"
+        classNames={{
+        }}
       >
-        <ModalContent>
+        <ModalContent className="">
           
             <>
-              <ModalHeader className="flex flex-col gap-1"></ModalHeader>
-              <ModalBody>
+              <ModalHeader/>
+              <ModalBody className="align-middle">
                     <Spinner label={title} color="primary" size="lg"/>
               </ModalBody>
               <ModalFooter/>
