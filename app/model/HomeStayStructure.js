@@ -1,5 +1,5 @@
 const homeStay = {
-    isUrbanOrRural: 'Rural',
+    isUrbanOrRular: 'Rural',
     isPrivateOrGovt: 'Private',
     isNormalOrHeritage:'Normal',
     state:"Sikkim",
@@ -73,7 +73,7 @@ export default  homeStay;
 
 export const sethomeStay = (feilds)=>{
     let template = {
-        isUrbanOrRural: 'Rural',
+        isUrbanOrRular: 'Rural',
         isPrivateOrGovt: 'Private',
         isNormalOrHeritage:'Normal',
         state:"Sikkim",
@@ -146,7 +146,7 @@ export const sethomeStay = (feilds)=>{
 
 export const setBlockA = (feilds)=>{
     let template = {
-        isUrbanOrRural: 'Rural',
+        isUrbanOrRular: 'Rural',
         isPrivateOrGovt: 'Private',
         isNormalOrHeritage:'Normal',
         state:"Sikkim",

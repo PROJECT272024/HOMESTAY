@@ -97,7 +97,7 @@ const HomestayEditForm =  ({params}) => {
 
     useEffect(()=>{
         if(isChange){
-            let allBtn = [['isUrbanOrRural',feilds.isUrbanOrRural],['isPrivateOrGovt',feilds.isPrivateOrGovt],
+            let allBtn = [['isUrbanOrRular',feilds.isUrbanOrRular],['isPrivateOrGovt',feilds.isPrivateOrGovt],
                         ['isNormalOrHeritage',feilds.isNormalOrHeritage],['gender',feilds.gender],
                         ['isRegistredWithDot',feilds.isRegistredWithDot],['isRegisteredWithLocal',feilds.isRegisteredWithLocal],
                         ['transportation',feilds.transportation],
@@ -1005,11 +1005,11 @@ const HomestayEditForm =  ({params}) => {
               [name]:value
             }));
           } 
-        /*if(name=='isUrbanOrRural'){
+        /*if(name=='isUrbanOrRular'){
             
             setFeilds((prevFeilds)=>({
                 ...prevFeilds,
-                'isUrbanOrRural':value
+                'isUrbanOrRular':value
                 }
             ));
         }else if(name=='isPrivateOrGovt'){
@@ -1642,8 +1642,8 @@ const HomestayEditForm =  ({params}) => {
                     <fieldset className="border border-solid border-green-300 p-2 bg-white">
                         <h2 className='text-blue-700 font-bold'>Establishment Types</h2>
                         <div className='mt-2  sm:grid sm:grid-cols-3 gap-1'>
-                            <RadioGroupTypeStyle id="isUrbanOrRural" name="isUrbanOrRural"
-                                type='horizontal' value={feilds.isUrbanOrRural}
+                            <RadioGroupTypeStyle id="isUrbanOrRular" name="isUrbanOrRular"
+                                type='horizontal' value={feilds.isUrbanOrRular}
                                 handler={handleRadioChange} title='Type 1'
                                 options={[['Rural','Rural'],['Urban','Urban']]}/>
                             

@@ -32,7 +32,7 @@ const makeDataSet =  (data)=>{
     if(data){
       try {
         for(let i of data){      
-          if(i.isUrbanOrrural=='Urban'){
+          if(i.isUrbanOrRular=='Urban'){
               result.urban = result.urban +1
           }else{
               result.rural = result.rural +1 

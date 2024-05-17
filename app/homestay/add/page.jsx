@@ -815,11 +815,11 @@ const HomestayForm =  () => {
               [name]:value
             }));
           } 
-        /*if(name=='isUrbanOrRural'){
+        /*if(name=='isUrbanOrRular'){
             
             setFeilds((prevFeilds)=>({
                 ...prevFeilds,
-                'isUrbanOrRural':value
+                'isUrbanOrRular':value
                 }
             ));
         }else if(name=='isPrivateOrGovt'){
@@ -1453,8 +1453,8 @@ const HomestayForm =  () => {
                     <fieldset className="border border-solid border-green-300 p-2 bg-white">
                         <h2 className='text-blue-700 font-bold'>Establishment Types</h2>
                         <div className='mt-2  sm:grid sm:grid-cols-3'>
-                            <RadioGroupTypeStyle id="isUrbanOrRural" name="isUrbanOrRural"
-                                type='vertical' value={feilds.isUrbanOrRural}
+                            <RadioGroupTypeStyle id="isUrbanOrRular" name="isUrbanOrRular"
+                                type='vertical' value={feilds.isUrbanOrRular}
                                 handler={handleRadioChange}
                                 options={[['Rural','Rural'],['Urban','Urban']]}/>
                             
