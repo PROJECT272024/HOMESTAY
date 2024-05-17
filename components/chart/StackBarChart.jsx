@@ -1,16 +1,15 @@
 'use client'
-import React from 'react'
-import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,Legend } from 'recharts';
+import React, { useState } from 'react'
+import { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,Cell } from 'recharts';
 
-
+const COLORS = ['#F8B195', '#56C596', '#99B898', '#83AF9B','#534666','#F67280','#321456'];
 const CustomTooltip = ({ active, payload, label}) => {
-  
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip bg-gray-50 p-2">
         <p className="label font-bold">{`${label}`}</p>
-        <p className="desc text-[rgba(7,188,11,0.6)]">{payload[0].payload.label1} - {payload[0].value} </p>
-        <p className="desc text-[rgba(231,76,60,0.6)]" >{payload[0].payload.label2} - {payload[1].value} </p>
+        <p style={{color: payload[0].payload.color1}}>{payload[0].payload.label1} - {payload[0].value} </p>
+        <p style={{color: payload[0].payload.color2}}>{payload[0].payload.label2} - {payload[1].value} </p>
       </div>
     );
   }
@@ -18,6 +17,7 @@ const CustomTooltip = ({ active, payload, label}) => {
   return null;
 };
 const StackBarChart = ({dataSet}) => {
+  const [count,setCount]=useState(0)
   return (
     <div style={{position: 'relative', width: '100%', paddingBottom: '0px'}}>
       <div >
@@ -29,8 +29,17 @@ const StackBarChart = ({dataSet}) => {
             <XAxis dataKey="name" />
             <YAxis/>
             <Tooltip content={<CustomTooltip/>}/>
-            <Bar dataKey="x" label='label1' stackId="a" fill="rgba(7,188,11,0.6)"/>
-            <Bar dataKey="y" label='label2' stackId="a" fill="rgba(231,76,60,0.6)"/>
+            <Bar dataKey="x" label='label1' stackId="a" >
+              {dataSet.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color1} />
+              ))}
+            </Bar>
+            <Bar dataKey="y" label='label2' stackId="a">
+              {dataSet.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color2} />
+              ))}
+            </Bar>
+            
           </BarChart>
         </ResponsiveContainer>
       </div>

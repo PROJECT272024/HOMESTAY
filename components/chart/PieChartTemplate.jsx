@@ -3,10 +3,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer,Tooltip,Legend } from 'rechart
 import { FaSquareFull } from 'react-icons/fa';
 
 
-const COLORS = ['#0088FE', '#00C49F', '#121212', '#F08042','#AA0042','#AA8000','#e74c3c'];
+const COLORS = ['#F8B195', '#56C596', '#99B898', '#534666','#83AF9B','#F67280','#321456'];
 
 const CustomTooltip = ({ active, payload}) => {
-  
+  //console.log(payload)
   if (active && payload && payload.length) {
     let per=0
     let total = payload[0].payload.total
@@ -17,7 +17,7 @@ const CustomTooltip = ({ active, payload}) => {
     }
     return (
       <div className="custom-tooltip bg-gray-50 p-2">
-        <p className={`desc text-[${payload[0].payload.fill}]`}>
+        <p style={{color: payload[0].payload.fill}}>
           {`${payload[0].payload.x} - ${payload[0].value} - ${Math.round(per)}%`}
         </p>
       </div>
