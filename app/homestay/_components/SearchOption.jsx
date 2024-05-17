@@ -374,6 +374,7 @@ const SearchOption = () => {
         }else{
           toast.info("No data fetched from database")
         }  
+        setPageNo(1)
       } catch (error) {
         toast.error("Problem in retreiving data")
       }finally{
