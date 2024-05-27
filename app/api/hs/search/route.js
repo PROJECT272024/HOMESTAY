@@ -20,6 +20,7 @@ export const POST = async (res)=>{
         }else{
             if('offset' in data){
                 result = await homeStay.find(data.query)
+                        .sort({createdOn: -1})
                         .skip(data.offset)
                         .limit(data.pageSize);
             }else{

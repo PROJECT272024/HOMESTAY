@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import ConfirmModal from "@/components/ConfirmModel";
 
 
-export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
+export default function  PaginatedTable({inputData,handleUpdate,handleDelete,handleChange}) {
   const [page, setPage] = useState(1);
   const [message, setMessage] = useState('');
   const [isProcessing, setProcessing] = useState(false);
@@ -40,10 +40,13 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
       let response = await handleUpdate(null,{status:val,id})
       if(response.errors){
         toast.error(response.errors)
+        setProcessing(false)
       }else{
+        setProcessing(false)
         toast.success('Homestay status Updated')
+        handleChange(id,'u',val)
       }
-      setProcessing(false)
+      
     }
     callUpdate()
   }
@@ -61,12 +64,13 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
     let callDelete = async () => {
       let response = await handleDelete(null,{id:delId})
       if(response.errors){
+        setProcessing(false)
         toast.error(response.errors)
       }else{
+        setProcessing(false)
         toast.success('Homestay Deleted Sucessfully')
+        handleChange(delId,'d')
       }
-      setProcessing(false)
-      
     }
     callDelete()
   }
@@ -97,7 +101,7 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
       case "type":
         val = (cellValue.trim()).split('^')
         return (
-          <div className="flex align-middle flex-col md:flex-row gap-px">
+          <div className="flex align-middle flex-col md:flex-row md:flex-wrap gap-px">
               {val[0].trim()=='R' && <div className="flex items-center justify-center  p-1 
                 rounded-full text-white  bg-orange-300 font-bold
                 text-xs md:text-sm h-4 w-4 md:h-6 md:w-6">R</div>}
@@ -153,6 +157,7 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
           </div>
         );
       case "isStatus":
+        console.log('Status Test - ',cellValue)
         return (
           <div className="flex align-middle text-xl">
             {
@@ -203,7 +208,7 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
                   </button>
               </Tooltip>
             </div>
-            <div>
+            <div className="flex flex-col md:flex-row md:flex-wrap">
                 {
                     val[1].trim()==1 && 
                     <div  className="flex flex-col md:flex-row">
@@ -269,7 +274,7 @@ export default function  PaginatedTable({inputData,handleUpdate,handleDelete}) {
     
 
   return (
-    <div className="sm:mx-[3%] md:mx-[5%] lg:mx-[10%]">
+    <div className="sm:mx-[3%] md:mx-[5%] lg:mx-[10%] overflow-scroll">
       
       <Table 
         aria-label="Homestay Table"

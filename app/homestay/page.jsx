@@ -1,12 +1,21 @@
-import SearchOption from '@/app/homestay/_components/SearchOption'
-import React from 'react'
 
-const page = () => {
-  
+import React from 'react'
+import { allHomestayDataForCardView } from '@/actions/homestay'
+import SearchOption from './_components/SearchOption'
+
+const page = async () => {
+    
+  let result = async() => {
+    return await allHomestayDataForCardView()
+  }
+  let data = await result();
   return (
-    <section>
-      <SearchOption/>
-    </section>
+
+    <div>
+        {
+         <SearchOption orgData={data.result}/> 
+        }
+    </div>
   )
 }
 

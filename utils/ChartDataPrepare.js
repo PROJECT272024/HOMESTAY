@@ -28,8 +28,9 @@ const makeDataSet =  (data)=>{
         illetrate:0,
         total:0    
     }
-    result.total=data.length
+    
     if(data){
+      result.total=data.length
       try {
         for(let i of data){      
           if(i.isUrbanOrRular=='Urban'){

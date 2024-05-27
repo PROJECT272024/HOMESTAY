@@ -69,20 +69,26 @@ export const DELETE = async (res,{params})=>{
         console.log('ID - ',id)
         const exsistingHs = await homeStay.findByIdAndDelete(id)
         let makeId = []
-        exsistingHs.homestayImages.map((val,index)=>(
-            makeId.push(createPublicId(val))
-        ));
-        if(makeId.length>0){
-            await cloudinary.api.delete_resources(makeId, { invalidate: true }, function(error, result) {
-                if (error) {
-                    console.error(error);
-                }else{
-                    console.log("Result - ",result)
-                }
-            });
+        if ('homestayImages' in exsistingHs) {
+            if (exsistingHs.homestayImages.length > 0) {
+                exsistingHs.homestayImages.map((val,index)=>(
+                    makeId.push(createPublicId(val))
+                ));
+            }
+            if(makeId.length>0){
+                await cloudinary.api.delete_resources(makeId, { invalidate: true }, function(error, result) {
+                    if (error) {
+                        console.error(error);
+                    }else{
+                        console.log("Result - ",result)
+                    }
+                });
+            }    
         }
-        if(exsistingHs.signature!=""){
-            await cloudinary.uploader.destroy(createPublicId(exsistingHs.signature))
+        if ('signature' in exsistingHs) {
+            if(exsistingHs.signature!=""){
+                await cloudinary.uploader.destroy(createPublicId(exsistingHs.signature))
+            }
         }
         return new Response(JSON.stringify({
             'message':'Deletion success'}),

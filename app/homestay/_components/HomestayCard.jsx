@@ -141,8 +141,7 @@ const HomestayCard = ({data,handleView,handleEdit,handleDelete}) => {
                                 hover:drop-shadow-md hover:bg-blue-800' onClick={(e)=>handleEdit(e,data._id)}>
                                 <FaRegEdit className='font-bold mr-2'/> <div>Edit</div>
                             </button>
-                            <button  signature={data.signature}  images={data.homestayImages} 
-                                className='p-2 sm:w-20 flex flex-row items-center justify-center bg-red-600 mr-2 rounded-lg 
+                            <button  className='p-2 sm:w-20 flex flex-row items-center justify-center bg-red-600 mr-2 rounded-lg 
                                 hover:drop-shadow-md hover:bg-red-800' onClick={(e)=>handleDelete(e,data._id)}>
                                 <FaTrashAlt  className='font-bold sm:mr-2'/> <span className='hidden sm:flex'>Delete</span>
                             </button>

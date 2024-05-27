@@ -109,7 +109,7 @@ const Analytics = ({category,data}) => {
                             <td rowSpan={2}>{prepareDs.type[0].total}</td>
                       </tr>
                       <tr className='border-b-1 border-r-1 border-gray-100'>
-                          <th>Rular</th>
+                          <th>Rural</th>
                           <td>{prepareDs.type[1].y}</td>
                       </tr>
                       <tr className='bg-gray-50 border-r-1 border-b-1 border-gray-100'>

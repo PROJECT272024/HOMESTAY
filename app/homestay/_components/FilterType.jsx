@@ -1,9 +1,10 @@
+'use client'
 import DropDownTypeStyle from '@/components/formfields/DropDownTypeStyle';
 import { district } from '@/utils/district-constituency';
 import React, { useState } from 'react'
 
 
-const FilterType = ({setQuery,setCategory}) => {
+const FilterType = ({title, setQuery,setCategory}) => {
   const regType = ['With DOT&CAV','With Local',
                 'Not with DOT&CAV','Not with Local'];
   const estdType = ['Rural','Urban','Government','Private','Normal','Heritage']
@@ -46,22 +47,28 @@ const FilterType = ({setQuery,setCategory}) => {
     }
 
     if(name=='district'){
+        delete customQuery.district
         if(value!=''){
             customQuery.district = value
-        }else{
-            delete customQuery.district
         }
         setSelectDistrict(value)
         setCategory(name,value)
     }else if(name=='gender'){
+        delete customQuery.gender
         if(value!=''){
             customQuery.gender = value
-        }else{
-            delete customQuery.gender
         }
         setSelectGender(value)
         setCategory(name,value)
     } else if(name=='type'){
+        if('isPrivateOrGovt' in customQuery){
+            delete customQuery.isPrivateOrGovt
+        }else if('isUrbanOrRular' in customQuery){
+            delete customQuery.isUrbanOrRular
+        }else if('isNormalOrHeritage' in customQuery){
+            delete customQuery.isNormalOrHeritage
+        }
+
         if(value!=''){
             if(value==estdType[2]|| value==estdType[3]){
                 customQuery.isPrivateOrGovt = value
@@ -70,18 +77,15 @@ const FilterType = ({setQuery,setCategory}) => {
             }else{
                 customQuery.isNormalOrHeritage = value
             } 
-        }else{
-            if('isPrivateOrGovt' in customQuery){
-                delete customQuery.isPrivateOrGovt
-            }else if('isUrbanOrRular' in customQuery){
-                delete customQuery.isUrbanOrRular
-            }else if('isNormalOrHeritage' in customQuery){
-                delete customQuery.isNormalOrHeritage
-            }
         }
         setSelectType(value)
         setCategory(name,value)
     }else{
+        if('isRegistredWithDot' in customQuery){
+            delete customQuery.isRegistredWithDot
+        }else if('isRegisteredWithLocal' in customQuery){
+            delete customQuery.isRegisteredWithLocal
+        }
         if(value!=''){
             if(value==regType[0]){
                 customQuery.isRegistredWithDot = 'Yes'
@@ -92,12 +96,6 @@ const FilterType = ({setQuery,setCategory}) => {
             }else{
                     customQuery.isRegisteredWithLocal = 'No'
             }
-        }else{
-            if('isRegistredWithDot' in customQuery){
-                delete customQuery.isRegistredWithDot
-            }else if('isRegisteredWithLocal' in customQuery){
-                delete customQuery.isRegisteredWithLocal
-            }
         }
         setSelectRegistration(value)
         setCategory(name,value)
@@ -106,7 +104,7 @@ const FilterType = ({setQuery,setCategory}) => {
   };
   return (
     <div className='p-8 md:p-16 mx-auto bg-green-700 w-full flex flex-col'>
-        <h1 className='flex justify-center text-xl md:text-6xl font-bold text-white'>Homestay Analysis</h1>
+        <h1 className='flex justify-center text-xl md:text-6xl font-bold text-white'>Homestay {title}</h1>
         <div className='grid grid-cols-2 md:grid-cols-4 w-full gap-2 mt-8'>
             <DropDownTypeStyle id='district' name="district" placeholder='District' 
                 startWithEmpty="Yes" options={district} selectValue={selectDistrict} handler={handleDropDown}/>

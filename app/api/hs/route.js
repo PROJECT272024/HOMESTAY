@@ -1,6 +1,6 @@
 import homeStay from "@/app/model/Homestay";
 import connectDB from "@/config/database";
-export const GET = async ()=>{
+export const GET = async (res)=>{
     try {
         await connectDB()
         //const home = new homeStay();

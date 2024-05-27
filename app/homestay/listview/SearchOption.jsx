@@ -1,29 +1,23 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import HomestayContainer from './HomestayContainer'
 import DropDownTypeStyle from '@/components/formfields/DropDownTypeStyle'
 import InputTextStyle from '@/components/formfields/InputTypeStyle'
 import InputNumberTextStyle from '@/components/formfields/InputNumberTypeStyle'
-import FilterOption from './FilterOption'
-import { Pagination } from '@nextui-org/pagination'
-import { deleteHomestay } from '@/actions/homestay'
-const SearchOption = ({orgData}) => {
+import FilterOption from '../_components/FilterOption'
+import PaginatedTable from '../_components/ListView'
+import { useRouter } from 'next/navigation'
+const SearchOption = ({orgData,handleUpdate,handleDelete}) => {
   //const { data: session, status } = useSession();
-  const pageContent=6
-  const [pageNo, setPageNo] = useState(1)
-  const [totalItems, setTotalItems] = useState(1)
+  
   
   const [isOpen, setIsOpen] = useState(true)
   const [selectOption, setSelectOption] = useState("HomeStay Name")
   const [searchText, setSearchText] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
   const [query, setQuery] = useState({})
 
   const [modOrgData, setModOrgData] = useState(orgData)
   const [result, setResult] = useState(modOrgData)
-  const [disResult, setDisResult] = useState(modOrgData)
   const [change, setChange] = useState(true)//this is to track the change in tsearcchtext
-
   const containerRef = useRef()
 
   const project = {
@@ -41,17 +35,10 @@ const SearchOption = ({orgData}) => {
     homestayImages: 1,
   }
   const optionType = ['HomeStay Name', 'Owner Name', 'DOT&CAV Registration Number',
-    'Local Registration Number', 'Phone Number','Email of DEO']
-
+    'Local Registration Number', 'Phone Number','Email of entered user']
 
 
   
-  const handlePageChange = (newPage) => {
-    setPageNo(newPage)
-    console.log('page - ',(newPage-1)*pageContent, newPage*pageContent)
-    setDisResult(result.slice((newPage-1)*pageContent, newPage*pageContent))
-    containerRef.current.focus()
-  };
   const getData = (otype='',textVal = '') => {
     //DFSFSD/** */
     let tempData = modOrgData
@@ -108,9 +95,39 @@ const SearchOption = ({orgData}) => {
         console.log('key - ',key) 
         tempData = tempData.filter((val) => val[key] == query[key])
     } 
-    setTotalItems(Math.ceil(tempData.length/pageContent))
-
     setResult(tempData)
+  }
+  const handleChange = (id,type='d',status=1) => {//type=d, type=u
+    let data = result.slice()
+    let newResult
+    if (type=='d') {
+      console.log('Before delte - ',data.length, id)
+      newResult = []//data.filter((val) => val['_id']!=id )
+      for(let i=0;i<data.length;i++) {
+        console.log('Testing- ',data[i]['_id'],id)
+        if (data[i]['_id']==id) {
+          console.log('I am here - ',data[i]['_id'])
+          continue
+        }
+        newResult.push(data[i]) 
+      }
+      console.log('After delte - ',newResult.length)
+    }else{
+      newResult = data.map((obj) => {
+        if (obj['_id'] == id) {
+          console.log('status change from ',obj['_id'],id,obj.isStatus, status)
+          let newVal = id+"^"+status
+          obj = {
+            ...obj,
+            ['isStatus']:status,
+            ['statuswithid']:newVal
+          }
+        }
+        return obj;
+      });
+    }
+    setResult(() =>newResult)
+    setModOrgData(newResult)
   }
 
   useEffect(() => {
@@ -123,25 +140,20 @@ const SearchOption = ({orgData}) => {
     }
     getData(selectOption,searchText) 
     
-    setDisResult(result.slice(0, pageContent))
     window.addEventListener('resize', onResize)
 
   }, []);
 
   useEffect(() => {
     console.log('Effect is done') 
-    setPageNo(1) 
     getData(selectOption,searchText) 
-    setDisResult(result.slice(0, pageContent))
   }, [query,change]);
+  /*useEffect(() => {
+    console.log('Mod Effect is done',result[0].isStatus) 
+    setResult(result)
+  }, [modOrgData]);*/
 
-
-  useEffect(() => {
-    console.log('MOD EFFECT - ',(pageNo-1)*pageContent, pageNo*pageContent)
-    setDisResult(result.slice((pageNo-1)*pageContent, pageNo*pageContent))
-  }, [modOrgData]);
-  
-  const modifyData= (id) => {
+  /*const modifyData= (id) => {
     let prev = modOrgData.length
     
     let modData = modOrgData.filter((val) => val['_id']!=id )
@@ -151,10 +163,11 @@ const SearchOption = ({orgData}) => {
     setModOrgData(modData)
     if (prev%pageContent==1) {
       setPageNo(pageNo-1)
+      
     }
     setTotalItems(Math.ceil(modRes.length/pageContent))
     
-  };
+  };*/
   
   const handleDropDown = (event) => {
     const { value } = event.target
@@ -262,22 +275,10 @@ const SearchOption = ({orgData}) => {
         <button ref={containerRef} className='h-full w-full' ></button>
       </div>
       <section >
-        <HomestayContainer data={disResult} setDelete={deleteHomestay}
+      <PaginatedTable inputData = {result} handleUpdate={handleUpdate} handleDelete={handleDelete} handleChange={handleChange}/>
+        {/* <HomestayContainer data={disResult} setDelete={deleteHomestay}
           isLoading={isLoading} setIsLoading={setIsLoading}   modifyData={modifyData}/>
-        
-        {disResult && disResult.length>0  &&
-          <div className="flex w-full p-5 justify-center">
-            <Pagination
-              isCompact
-              showControls
-              showShadow
-              color="success"
-              page={pageNo}
-              total={totalItems}
-              onChange={handlePageChange}
-            />
-          </div>
-        }
+         */}
       </section>
     </>
   )
